@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var newWindow;
+        $("#idCheck").on("click", function () {
+          newWindow = window.open(
+            "idcheck.html",
+            "",
+            "top=100, left=300, width=300, height=300"
+          );
+        });
+        $("#childclose").on("click", function () {
+          $("#result").html(newWindow.$("#result").html());
+          newWindow.close();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action=".jsp">
+      ID : <input type="text" id="id" />
+      <input type="button" id="idCheck" value="doubleCheck" />
+      <input type="button" id="childclose" value="closeNewWindow" />
+      <br />
+      <div id="result"></div>
+      name : <input type="text" id="name" /> <br />
+      password : <input type="password" id="pw" /> <br />
+      phone : <input type="text" id="phone" /> <br />
+      <input type="submit" value="signUp" />
+    </form>
+  </body>
+</html>

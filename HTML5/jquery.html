@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        $("img:first").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIOcoQfq0DDgGIgpEUNeLB4Ye1XMcYRCpbMGsOmKA7&s"); //setter
+        $("img:first").css("width", 100);
+        $("img:first").css("height", 100);
+        $("img:first").attr("alt", "100");
+        
+        $("img:last").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIOcoQfq0DDgGIgpEUNeLB4Ye1XMcYRCpbMGsOmKA7&s");
+        $("img:last").css("width", 100);
+        $("img:last").css("height", 100);
+        $("img:last").attr("alt", "Beenzino");
+        $("img").each((index) => {
+          $("#result").append((index +1) + " 번째 이미지의 경로 = " + $(this).attr("src") + "<br />");
+        });
+
+        var img_array = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIOcoQfq0DDgGIgpEUNeLB4Ye1XMcYRCpbMGsOmKA7&s", "https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/080/825/402/80825402_1464659063599_1_600x600.JPG/dims/resize/Q_80,0"];
+
+        setInterval(() => {
+          $("#addImg").append("<img>");
+          $("#addImg img").each((index) => {
+            $(this).attr("src", img_array[index % img_array.length]);
+            $("#addImg img").attr("width", 100);
+            $("#addImg img").attr("height", 100);
+          });
+        }, 1000)
+        // setInterval(() => {
+        //   $("img").each((index) => {
+        //     if($("img:eq("+index+")").attr("src") == undefined) {
+        //       $(this).attr("src", "https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/080/825/402/80825402_1464659063599_1_600x600.JPG/dims/resize/Q_80,0");
+        //       $("result").html("보인다");
+        //     }
+        //     else {
+        //       $(this).removeAttr("src");
+        //       $("result").html("안 보인다");
+        //     }
+        //   });
+        // }, 1000)
+
+        // $("img").removeAttr("src");
+        // $("#userInput").attr("value", "CHANGE");
+        // $("#userInput").val("CHANGE");
+
+        // $("result").text($("img:first")).attr("src"); //getter
+      });
+    </script>
+  </head>
+  <body>
+    <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIOcoQfq0DDgGIgpEUNeLB4Ye1XMcYRCpbMGsOmKA7&s" alt="alternative image" width="100px" height="100px" />
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIOcoQfq0DDgGIgpEUNeLB4Ye1XMcYRCpbMGsOmKA7&s" alt="alternative image" style="width:100px;height:100px" /> -->
+    <img />
+    <img />
+    <div id="addImg"></div>
+    <h1 id="result"></h1>
+  </body>
+</html>

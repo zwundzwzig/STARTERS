@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #clock {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function getClock() {
+        const hours = String(new Date().getHours()).padStart(2, "0");
+        const minutes = String(new Date().getMinutes()).padStart(2, "0");
+        const seconds = String(new Date().getSeconds()).padStart(2, "0");
+        clock.innerText = `${hours} : ${minutes} : ${seconds}`;
+      }
+
+      setInterval(getClock, 0);
+
+      onmousedown = () =>
+        alert(
+          (document.getElementById("clock").innerText = "이것은 시계입니다.")
+        );
+    </script>
+    <h1 id="clock"></h1>
+  </body>
+</html>

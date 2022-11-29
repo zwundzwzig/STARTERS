@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("input:checkbox:first").on("click", () => {
+          // 모두 체크되지 않았다면 클릭했을 때 체크해라
+          if ($(this).attr("checked") == undefined)
+            $(this).attr("checked", "checked");
+          else $(this).removeAttr("checked");
+          // 제목, 내용, 작성자 모두 체크 여부
+          if ($(this).attr("checked") == "checked") {
+            $("input:checkbox").attr("checked", "checked");
+            $("input:checkbox").prop("checked", true);
+          } else {
+            $("input:checkbox").removeAttr("checked");
+            $("input:checkbox").prop("checked", false);
+          }
+        });
+        $("#searchform").on("submit", () => {
+          if ($("input:text").val() == "") event.preventDefault();
+          $("input:checkbox:gt(0)").each(function () {
+            if ($(this).attr("checked") == undefined) event.preventDefault();
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form action="" id="searchform">
+      <input type="checkbox" value="모두" /> 모두
+      <input type="checkbox" value="제목" /> 제목
+      <input type="checkbox" value="내용" /> 내용
+      <input type="checkbox" value="작성자" /> 작성자
+      <input type="text" placeholder="typeKeyword" />
+      <input type="submit" value="search" />
+    </form>
+  </body>
+</html>
