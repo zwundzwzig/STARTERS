@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        display: block;
+        margin: auto;
+      }
+      #pw {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+      #pw, #id {
+        margin-right: 10px;
+      }
+      #loginbtn {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>로그인</h1>
+    <hr />
+    <label for="">아이디<input type="text" id="id" /></label>
+    <br />
+    <label for="">비밀번호<input type="password" id="pw" /> </label><br />
+    <form id="loginForm">
+      <input type="submit" value="로그인" id="loginbtn" />
+      <input type="button" value="취소" id="cancelbtn" />
+    </form>
+
+    <script type="text/javascript">
+      document.querySelector("#loginbtn").onclick = () => {
+        if (document.getElementById("id").value === "")
+          alert("아이디를 입력해주세요");
+        if (
+          document.getElementById("id").value !== "abcd" ||
+          document.getElementById("pw").value !== "1234"
+        )
+          alert("login fail");
+        if (
+          document.getElementById("id").value === "abcd" &&
+          document.getElementById("pw").value === "1234"
+        ) {
+          alert("login ok");
+          document.getElementById("loginForm").action = "login.jsp";
+        }
+      };
+
+      document.getElementById("cancelbtn").onclick = () => {
+        document.getElementById("id").value = "";
+        document.getElementById("pw").value = "";
+      };
+    </script>
+  </body>
+</html>
