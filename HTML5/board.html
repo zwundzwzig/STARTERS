@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script type="text/javascript">
+      var boardList = new Array();
+
+      window.onload = function () {
+        var seq = document.querySelector("#seq"); //text
+        var title = document.querySelector("#title"); //text
+        var contents = document.querySelector("#contents"); //text
+        var save = document.querySelector("#save"); //button
+        var saveResult = document.querySelector("#saveresult"); //div
+        var output = document.querySelector("#output"); //button
+        var list = document.querySelector("#list"); //div
+
+        save.onclick = function () {
+          if (boardList.length > 5) {
+            saveResult.innerHTML = "<h3>게시물 추가 저장 불가능합니다. 리스트를 출력하시오.</h3>";
+            return;
+          }
+          var board = {
+            seq: seq.value,
+            title: title.value,
+            contents: contents.value,
+            time: new Date().toLocaleDateString(),
+          };
+            boardList.push(board);
+            saveResult.innerHTML = "<h3>게시물" + boardList.length + "개 저장됐습니다.</h3>";
+        };
+
+        output.onclick = function () {
+          for (var i = 0; i < boardList.length; i++) {
+            list.innerHTML +=
+              "<br />" +
+              boardList[i].seq +
+              " : " +
+              boardList[i].title +
+              " : " +
+              boardList[i].contents +
+              " : " +
+              boardList[i].time;
+          }
+          boardList.length = 0;
+          saveResult.innerHTML = "";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    번호:<input type="text" id="seq" /> 
+    제목:<input type="text" id="title" />
+    내용:<input type="text" id="contents" />
+    <input type="button" id="save" value="게시물저장" />
+    <div id="saveresult">게시물 저장 상태 결과 출력</div>
+    <input type="button" id="output" value="게시물조회" />
+    <div id="list">5개 게시물 입력 결과 출력</div>
+  </body>
+</html>
