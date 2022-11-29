@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STARTERS</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let age = prompt("나이를 입력하시오.");
+
+      let result6 = age >= 20 ? "성인" : "아이";
+      document.write("<h3> 성년 여부 : ", result6, "</h3>");
+
+      document.write("<table style='border:2px solid blue'>");
+        for(let i = 1; i <= 9; i++) {
+            document.write("<tr>");
+                for(let dan = 2; dan <= 9; dan++) {
+                    if(dan === 5) break;
+                    document.write("<td style='border:2px solid blue'>", dan, "*", i, "=", dan*i);
+                }
+                document.write("</tr>")
+        }
+    </script>
+  </body>
+</html>
