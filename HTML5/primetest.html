@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script type="text/javascript">
+      function suBtnClink() {
+        document.getElementById("result").value = "";
+      }
+
+      function getPrimeNumber() {
+        var prime = Number(document.querySelector("#su").value);
+        var other = parseInt(Math.sqrt(prime));
+
+        if (prime <= 1 || prime > 100) {
+          document.querySelector("#result").innerHTML = "false";
+          return;
+        }
+        if (prime % 2 === 0) {
+          document.querySelector("#result").innerHTML =
+            prime === 2 ? "true" : "false";
+          return;
+        }
+
+        for (let i = 3; i <= other; i += 2) {
+          if (prime % i === 0) {
+            document.querySelector("#result").innerHTML = "false";
+            return;
+          }
+        }
+
+        document.querySelector("#result").innerHTML = "true";
+      }
+    </script>
+  </head>
+  <body>
+    <label for="su">숫자입력</label>
+    <input
+      type="text"
+      id="su"
+      placeholder="2이상 100 이하"
+      onfocus="this.value=''"
+      onKeypress="javascript:if(event.keyCode==13){getPrimeNumber();}"
+    />
+    <input type="button" id="primebtn" value="소수 판단 하기" />
+    <div id="result">여기에 소수 판단 결과를 출력합니다.</div>
+  </body>
+</html>
