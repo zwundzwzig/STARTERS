@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BUTTON></title>
+    <script type="text/javascript">
+      window.onload = () => {
+        document.getElementById("btn1").onclick = () => {
+          document.getElementById("btn1").value = "버튼 10";
+          document.getElementById("btn1").style =
+            "width:100px; background-color:orange";
+        };
+        document.getElementById("btn1").onmouseout = () => {
+          document.getElementById("btn1").value = "버튼 10";
+          document.getElementById("btn1").style =
+            "width:100px;height:100ox;background-color:pink";
+        };
+        document.getElementById("btn1").onmouseleave = () => {
+          document.getElementById("btn1").value =
+            document.getElementById("btn2").value;
+          document.getElementById("btn1").style =
+            "width:100px;height:100ox;background-color:aqua";
+        };
+        document.getElementById("btn2").onmousedown = () => {
+          alert(
+            (document.getElementById("clock").innerText = "이것은 시계입니다.")
+          );
+          setInterval(getClock, 0);
+        };
+      };
+
+      function getClock() {
+        const hours = String(new Date().getHours()).padStart(2, "0");
+        const minutes = String(new Date().getMinutes()).padStart(2, "0");
+        const seconds = String(new Date().getSeconds()).padStart(2, "0");
+        clock.innerText = `${hours} : ${minutes} : ${seconds}`;
+      }
+      for (let i = 0; i < 3; i++) {
+        document.getElementsByTagName("h1").onclick = () => {
+          document.getElementById("h1value").innerHTML = document.getElementsByTagName("h1")[i].innerHTML;
+        };
+      }
+
+      document.querySelector("#h1value").onclick = () => {
+        document.write("wow")
+      }
+
+      //   setInterval(getClock, 0);
+    </script>
+  </head>
+  <body>
+    <input id="btn1" type="button" value="버튼1" />
+    <input id="btn2" type="button" value="버튼2" />
+    <h1 id="clock"></h1>
+    <h1>제목1</h1>
+    <h1>제목2</h1>
+    <h1>제목3</h1>
+    <div id="h1value"></div>
+  </body>
+</html>
