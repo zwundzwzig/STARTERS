@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="위치추적시작" id="start" />
+    <input type="button" value="위치추적종료" id="stop" />
+    <div id="result"></div>
+    <script type="text/javascript">
+      document.querySelector("#start").onclick = () => {
+        watchId = navigator.geolocation.watchPosition(success, fail);
+        document.querySelector("#result").innerHTML =
+          "<h3>Start Navigator</h3>";
+      };
+
+      document.querySelector("#stop").onclick = () => {
+        navigator.geolocation.clearWatch(watchId);
+        document.querySelector("#result").innerHTML = "<h3>Stop Navigator</h3>";
+      };
+
+      function success(me) {
+        var lat = me.coords.latitude;
+        var long = me.coords.longitude;
+        document.querySelector("#result").innerHTML =
+          "<h3> my latitude is " +
+          lat +
+          " and my longitude is" +
+          long +
+          "</h3>";
+        
+        window.open(
+          "http://maps.google.com?q=" + lat + "," + long +
+          "width=800, heigth=600, resizable=yes"
+        );
+      }
+
+      function fail(err) {
+        (document.querySelector("#result").innerHTML = "<h3> 오류 발생 "),
+          err.message,
+          " 오류 발생 ",
+          err.message,
+          "</h3>";
+      }
+    </script>
+  </body>
+</html>
