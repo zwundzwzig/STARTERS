@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $("#help").html($("#link").html() + " 하면 " + $("#link1").attr("href") + "합니다.");
+            $("#help2").html($("#link").html() + " 하면 " + $("#link1").prop("href") + "합니다.");
+            
+            $("#help").html("--" + " 하면 " + $("#a").attr("checked") + "합니다.");
+            $("#help2").html("--" + " 하면 " + $("#a").attr("checked") + "합니다.");
+            
+            setInterval(() => {
+                if($("#a").attr("checked") == "checked") $("#a").removeAttr("checked");
+                else $("#a").attr("checked", "checked");
+            }, 1000)
+
+            var clickCount = 0;
+            $("#btnclick").on("click", () => {
+                clickCount++;
+                $("#clickout").html(clickCount + "");
+            });
+
+            $("#btnstop").on("click", () => {
+                $("#btnclick").off(click);
+            })
+
+            $("#keyin").on("keypress", () => {
+                $("#keyout").html($("#keyin").val());
+                var regex = /^010[0-9]{3,4}[0-9]{4}$/;
+                var keyin = $("#keyin").val();
+                if(keyin.test(regex) !== null) {
+                    $("#keyout").html(keyin.match(regex));
+                    $("#keyout").css("background-color", "green")
+                }
+            })
+
+            $("#loginform").on("submit", () => {
+                var id = $("#id").val();
+                var pw = $("#pw").val();
+                var id_list = ["홍길동", "이철수", "박보검"];
+                var isId ;
+                var pw_regex = /^[0-9]{5}$/;
+
+                for(var i =0; i < id_list.length; i++) {
+                    if(id == id_list[i]) {
+                        isId = true;
+                        break;
+                    }
+                }
+                if(!pw_regex.test(pw)) {
+                    alert("you write password incorrectly!");
+                    event.preventDefault();
+                }
+            })
+        })
+    </script>
+  </head>
+  <body>
+    <a href="selector.html" id="link1">Let's go Selector</a>
+    <input type="checkbox" id="a" value="newssak" checked /> 새싹아카데미
+    <input type="checkbox" id="b" value="flower" /> 꽃잎아카데미
+    <input type="checkbox" id="c" value="yeolmae" /> 열매아카데미
+    <input type="checkbox" id="d" value="namu" /> 나무아카데미
+
+    <input type="button" value="clickBTN" id="btnclick" />
+    <input type="button" value="stopBTN" id="btnstop" />
+    <input type="button" value="outBTN" id="btnnotice" />
+    <div id="clickout"></div>
+
+    <input type="text" id="keyin" />
+    <input type="text" id="keyout" />
+
+    <div id="help"></div>
+    <div id="help2"></div>
+
+    <form id="loginform" action="login.jsp">
+        <label for="id">아이디</label><input type="text" name="" id="id" />
+        <label for="pw">password</label><input type="password" name="" id="pw" />
+        <input type="button" name="" id="submit" />
+        <input type="reset" name="" id="cancel" />
+    </form>
+
+    <form id="loginform2" action="login.jsp">
+        <label for="id">아이디</label><input type="text" name="" id="id" />
+        <label for="pw">password</label><input type="password" name="" id="pw" />
+        <input type="button" value="submit" id="submit" />
+        <input type="reset" value="cancel" id="cancel" />
+    </form>
+  </body>
+</html>

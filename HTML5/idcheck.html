@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var id_list = ["java", "html", "script", "jsp", "servelet"];
+        var id = opener.$("#id").val();
+        $("#result").html(id);
+
+        var isCheck;
+        for (var i = 0; i < id_list.length; i++) {
+          if (id == id_list[i]) {
+            isCheck = " 는 사용 불가합니다.";
+            break;
+          } else isCheck = " 는 사용 가능합니다.";
+        }
+        $("#result").append(isCheck);
+        $("#myclose").on("click", function () {
+          opener.$("#result").html($("#result").html());
+          close();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="result">중복검사여부</div>
+    <input type="button" value="close" id="myclose" />
+  </body>
+</html>
