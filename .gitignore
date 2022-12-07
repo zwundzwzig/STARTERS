@@ -1,2 +1,4 @@
 .vscode
 .env
+/.metadata/
+.DS_Store
