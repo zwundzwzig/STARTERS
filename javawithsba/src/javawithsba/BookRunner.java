@@ -8,10 +8,13 @@ public class BookRunner {
 		Book coreJavaScript = new Book();
 		
 		deepDiveJavaScript.setFavoratePart("Module");
-		coreJavaScript.setFavoratePart("scope");
+		coreJavaScript.setFavoratePart("");
 		
-		System.out.println(deepDiveJavaScript.getFavoratePart());
-		System.out.println(coreJavaScript.getFavoratePart());
+		String getDeep = deepDiveJavaScript.getFavoratePart();
+		String getCore = coreJavaScript.getFavoratePart();
+		
+		System.out.println(getDeep);
+		System.out.println(getCore);
 		
 		System.out.println();
 	}
