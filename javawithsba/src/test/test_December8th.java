@@ -38,7 +38,7 @@ public class test_December8th {
 		System.out.println("-----");
 		for (int i = 0; i < args.length - 1; i++) {
 			for (int j = i + 1; j < args.length; j++) {
-				int before = Integer.parseInt(args[i]);
+				int before = Integer.valueOf(args[i]);
 				int after = Integer.parseInt(args[j]);
 
 				int tmp = 0;

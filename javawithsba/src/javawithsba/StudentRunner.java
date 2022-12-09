@@ -19,6 +19,11 @@ public class StudentRunner {
 		int minimum = student.getMinimumOfMarks();
 		BigDecimal average = student.getAverageOfMarks();
 		
-		System.out.printf("%d %d %d %d %.3f", number, totalSum, maximum, minimum, average);
+		System.out.printf("%d %d %d %d %.3f", number, totalSum, maximum, minimum, average).println();
+		System.out.println(student);
+		
+		System.out.println(student);
+		student.addNewMarks(99);
+		student.removeMark(1);
 	}
 }
