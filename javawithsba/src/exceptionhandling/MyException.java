@@ -1,4 +1,4 @@
-package college;
+package exceptionhandling;
 
 class MyExcept extends Exception {
 	int errorCode;

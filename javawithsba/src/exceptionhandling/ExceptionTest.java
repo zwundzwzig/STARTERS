@@ -1,4 +1,4 @@
-package college;
+package exceptionhandling;
 
 public class ExceptionTest {
 
