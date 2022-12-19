@@ -1,4 +1,4 @@
-package college;
+package exceptionhandling;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
