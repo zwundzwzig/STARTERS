@@ -9,9 +9,9 @@ class Amount {
 		this.amount = amount;
 	}
 	
-	public void add(Amount other) throws Exception {
+	public void add(Amount other) throws CurrenciesDoNotMatchException {
 		if(!this.currency.equals(other.currency)) {
-			throw new Exception("Currencies Don't Match");
+			throw new CurrenciesDoNotMatchException("Currencies Don't Match " + this.currency + " and " + other.currency);
 		}
 		this.amount = this.amount + other.amount;
 	}
@@ -22,12 +22,14 @@ class Amount {
 }
 
 class CurrenciesDoNotMatchException extends Exception {
-	
+	public CurrenciesDoNotMatchException(String message) {
+		super(message);
+	}
 }
 
 public class ThrowingExceptionRunner {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws CurrenciesDoNotMatchException {
 		Amount amount1 = new Amount("JavaScript", 5);
 		Amount amount2 = new Amount("Java", 10);
 		
