@@ -6,4 +6,5 @@
  *
  */
 module javawithsba {
+	requires java.desktop;
 }

@@ -10,7 +10,7 @@ class SameSentence {
 	private void getSameSentences(List<String> sentences1, List<String> sentences2) {
 		for(int i = 0; i < sentences1.size(); i++) {
 			if(sentences1.get(i) == sentences2.get(i)) {
-				result += sentences2.get(i) + " ";
+				result += sentences1.get(i) + " ";
 			}
 		}
 	}
@@ -50,7 +50,7 @@ public class SameSentenceTest {
 		ss.compare(list1, list2);
 		System.out.println("================================");
 		System.out.println("list1, list3에서 같은 내용을 출력합니다");
-		ss.compare(list2, list3);
+		ss.compare(list1, list3);
 	}
 
 }
