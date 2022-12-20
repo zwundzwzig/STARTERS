@@ -8,7 +8,7 @@ class Task1 extends Thread {
 			System.out.print(i + " : ");
 		}
 		
-		System.out.println("\nTask1 Done");
+		System.out.printf("\nTask1 method priority is %d, Task1 Done\n", Thread.currentThread().getPriority()).println();;
 	}
 }
 
@@ -22,7 +22,7 @@ class Task2 implements Runnable {
 			System.out.print(i + " : ");
 		}
 		
-		System.out.println("\nTask2 Done\n");
+		System.out.printf("\nTask2 method priority is %d, Task2 Done\n", Thread.currentThread().getPriority()).println();;
 	}
 	
 }
@@ -33,6 +33,7 @@ public class ThreadKickOffTest {
 	// running - start 됐고 현재 실행되는 스레드
 	// blocked/waiting - 외부 인터페이스나 DB에 의해 사용자의 접근이 차단된 스레드
 	// terminated/dead - 실행이 완료된 스레드
+	// setPriority 우선 순위 - 10 to 1
 
 	public static void main(String[] args) throws InterruptedException {
 		Task1 task1 = new Task1();
@@ -53,8 +54,9 @@ public class ThreadKickOffTest {
 		for(int i =301; i <= 399; i++) {
 			System.out.print(i + " : ");
 		}
-		System.out.println("\nTask3 Done\n");
-		System.out.println("\nMain Done\n");
+
+		System.out.printf("\nTask3 method priority is %d, Task3 Done\n", Thread.currentThread().getPriority()).println();
+		System.out.printf("\nMain method priority is %d, Main Done\n", Thread.currentThread().getPriority());
 	}
 
 }

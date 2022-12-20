@@ -19,14 +19,16 @@ public class ExpTest {
 				for (Character express : expression.toCharArray()) {
 					if (express == '(')
 						stack.push(express);
+						
 					else if (express == ')')
 						stack.pop();
 				}
 				if (stack.isEmpty()) {
 					System.out.println("괄호가 일치합니다." + expression);
 				}
-			} catch (EmptyStackException e) {
-				System.out.println("괄호가 일치하지 않습니다." + expression);
+			} 
+			catch (EmptyStackException e) {
+				System.out.println("괄호가 일치하지 않습니다." + expressions);
 			}
 		}
 
