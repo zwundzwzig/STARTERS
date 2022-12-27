@@ -1,19 +1,18 @@
 package MultiThreading;
 
 class NumThread extends Thread {
-	
+
 	NumThread(String name) {
 		super(name);
 	}
-	
+
 	public void run() {
-		for(int i = 0; i < 99; i ++) {
+		for (int i = 0; i < 99; i++) {
 			System.out.println(getName() + " : " + i);
 		}
 		try {
 			Thread.sleep(1000);
-		}
-		catch(InterruptedException err) {
+		} catch (InterruptedException err) {
 			err.printStackTrace();
 		}
 	}
@@ -26,7 +25,7 @@ public class NumberThreadTest {
 		NumThread nt2 = new NumThread("Node");
 		nt1.start();
 		nt2.start();
-		
+
 	}
 
 }
