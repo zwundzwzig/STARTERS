@@ -1,59 +1,59 @@
 -- migrate:up
 --1.
-select
+SELECT
   first_name,
   department_id,
   salary
-from
+FROM
   employees
-where
+WHERE
   salary > (
-    select
-      avg(salary)
-    from
+    SELECT
+      AVG(salary)
+    FROM
       employees
-    where
+    WHERE
       department_id = 80
   );
 
 -- 2.
-select
+SELECT
   e.first_name,
   e.department_id,
   e.salary,
   d.department_name,
   l.city
-from
+FROM
   employees e
-  inner join departments d on e.department_id = d.department_id
-  inner join locations l on l.location_id = d.location_id
-where
+  INNER JOIN departments d ON e.department_id = d.department_id
+  INNER JOIN locations l ON l.location_id = d.location_id
+WHERE
   salary > (
-    select
+    SELECT
       avg(salary)
-    from
+    FROM
       employees
-    where
+    WHERE
       department_id = 50
   )
   and salary > (
-    select
-      min(salary)
-    from
+    SELECT
+      MIN(salary)
+    FROM
       employees
-    where
+    WHERE
       department_id = (
-        select
+        SELECT
           department_id
-        from
+        FROM
           departments d
-        where
+        WHERE
           d.location_id = (
-            select
+            SELECT
               l.location_id
-            from
+            FROM
               locations l
-            where
+            WHERE
               l.city = 'South San Francisco'
           )
       )
@@ -62,48 +62,84 @@ order by
   salary;
 
 --3.
-select
+SELECT
   j.job_id,
-  count(*) count
-from
+  COUNT(*) count
+FROM
   employees e
-  join jobs j on e.job_id = j.job_id
-group by
+  JOIN jobs j ON e.job_id = j.job_id
+GROUP BY
   j.job_id
 having
   count >= 10;
 
 --4.
-select
+SELECT
   e.first_name,
   d.department_name,
   e.salary
-from
+FROM
   employees e
-  inner join departments d on e.department_id = d.department_id
-where
-  (d.department_id, salary) in (
-    select
+  INNER JOIN departments d ON e.department_id = d.department_id
+WHERE
+  (d.department_id, salary) IN (
+    SELECT
       e.department_id,
       max(salary)
-    from
+    FROM
       employees e
-    group by
+    GROUP BY
       e.department_id
   );
 
 --5
-select
+SELECT
   employee_id,
   first_name,
   d.department_name,
   Min(salary),
   salary
-from
+FROM
   employees e
-  inner join departments d on e.department_id = d.department_id
-group by
+  INNER JOIN departments d ON e.department_id = d.department_id
+GROUP BY
   d.department_name,
   e.employee_id;
+
+--6
+SELECT
+  MONTH(hire_date) month,
+  COUNT(MONTH(hire_date)) count
+FROM
+  employees
+GROUP BY
+  MONTH(hire_date)
+HAVING
+  COUNT(MONTH(hire_date)) >= 10;
+
+--7
+SELECT
+  MY.first_name,
+  MY.salary,
+  BO.salary
+FROM
+  employees MY
+  LEFT OUTER JOIN employees BO ON MY.manager_id = BO.manager_id
+WHERE
+  MY.salary > BO.salary;
+
+--8
+SELECT
+  e.first_name,
+  e.salary,
+  j.job_title,
+  l.city
+FROM
+  jobs j
+  JOIN employees e ON j.job_id = e.job_id
+  JOIN departments d ON e.department_id = d.department_id
+  JOIN locations l ON d.location_id = l.location_id
+WHERE
+  city = 'Southlake';
 
 -- migrate:down
