@@ -15,7 +15,6 @@ public class MonthEmployeeTest {
 
 	public static void main(String[] args) {
 		Connection con = null;
-		ResultSet rs = null;
 		try {
 			Class.forName(ConnectionInform.DRIVER_CLASS);
 			con = DriverManager.getConnection(ConnectionInform.JDBC_URL, ConnectionInform.USERNAME,
@@ -28,21 +27,20 @@ public class MonthEmployeeTest {
 			String sql = "SELECT MONTH(hire_date) month, avg(salary) avg from employees where month(hire_date) != ? GROUP BY MONTH(hire_date) order by 1;";
 			PreparedStatement pt = con.prepareStatement(sql);
 			pt.setInt(1, month);
-			rs = pt.executeQuery();
-			
+			ResultSet rs = pt.executeQuery();
+
 			ArrayList<int[]> al = new ArrayList<>();
-			
+
 			while (rs.next()) {
 				int l = 0;
 				int resultMonth = rs.getInt(1);
 				double salary = rs.getDouble("avg");
-				int[] o = {resultMonth, (int) salary};
+				int[] o = { resultMonth, (int) salary };
 				al.add(o);
 				System.out.println(new MonthEmployeeTest().getEmployees(al.get(l)));
 				l++;
 				al.clear();
 			}
-			
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -53,7 +51,8 @@ public class MonthEmployeeTest {
 		} finally {
 			try {
 				con.close();
-			} catch (SQLException e) {}
+			} catch (SQLException e) {
+			}
 		}
 	}
 
