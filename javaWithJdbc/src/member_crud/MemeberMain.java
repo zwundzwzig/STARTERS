@@ -26,6 +26,9 @@ public class MemeberMain {
 			else if (menu == 1) {
 				new MemberInsertView().input();
 			}
+			else if (menu == 2) {
+				new MemberUpdateView().input();
+			}
 			else if (menu == 5) {
 				new TotalSelectView().input();
 			}

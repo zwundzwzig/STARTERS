@@ -23,6 +23,12 @@ public class MemberMain {
 		else if(menu == 1) {
 			new MemberInsertView().input(); 
 		}
+		else if(menu == 2) {
+			new MemberUpdateView().input();
+		}
+		else if(menu == 3) {
+			new MemberDeleteView().input();
+		}
 		else if(menu == 4) {
 			new OneSelectView().input();
 		}

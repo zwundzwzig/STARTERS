@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import jdbc.ConnectionInform;
 
@@ -164,4 +166,81 @@ public class MemberDAO {
 		}
 		return dto;
 	}//getMember
+
+
+	void updateMember(HashMap<String, String> updateMap) {
+		Connection con= null;
+		PreparedStatement pt= null;
+
+		try {
+		Class.forName(ConnectionInform.DRIVER_CLASS);
+		//1.db 연결
+		con = DriverManager.getConnection
+		(ConnectionInform.JDBC_URL, ConnectionInform.USERNAME, ConnectionInform.PASSWORD);
+		StringBuffer sql= new StringBuffer();//16문자버퍼+....
+		sql.append("update member set ");
+		Set<String> keys = updateMap.keySet();
+		for(String k : keys) {
+			if(!k.equals("id")) {
+				sql.append(k + "= '" + updateMap.get(k) + "' , ");
+			}
+		}
+		sql.deleteCharAt(sql.lastIndexOf(","));
+		sql.append(" where id=?");
+		
+		System.out.println(sql);//확인
+		pt = con.prepareStatement(sql.toString());
+		pt.setString(1,updateMap.get("id"));
+		pt.executeUpdate();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pt.close();
+				con.close();
+			}catch(Exception e) {}
+		}
+	}//updateMember
+
+	void deleteMember(String id) {
+		Connection con= null;
+		PreparedStatement pt= null;
+
+		try {
+		Class.forName(ConnectionInform.DRIVER_CLASS);
+		//1.db 연결
+		con = DriverManager.getConnection
+		(ConnectionInform.JDBC_URL, ConnectionInform.USERNAME, ConnectionInform.PASSWORD);
+		con.setAutoCommit(false);//수동 트랜잭션 설정 변경/
+		String sql1= "insert into deletedmember select * from member where id=?";
+		String sql2= "delete from member where id=?";
+		/////////////////////////////////////////
+		pt = con.prepareStatement(sql1);
+		pt.setString(1, id);
+		int insertcount = pt.executeUpdate();
+		//////////////////////////////////////////
+		//웹서버가 회원탈퇴요청 처리중- lock
+		// 또다른 회원정보수정 처리중- lock
+		pt = con.prepareStatement(sql2);
+		pt.setString(1, id);
+		int deletecount = pt.executeUpdate();//예외발생
+		////////////////////////////////////////
+		con.commit();
+		System.out.println("회원 탈퇴 처리 완료");
+		}catch(Exception e) {
+			System.out.println("회원 탈퇴 처리 중 문제 발생 - 취소");
+			try {
+			con.rollback();
+			}catch(Exception e2) {}
+			//e.printStackTrace();
+		}finally {
+			try {
+				pt.close();
+				con.close();
+			}catch(Exception e) {}
+		}
+	}//deleteMember
+
+
 }
