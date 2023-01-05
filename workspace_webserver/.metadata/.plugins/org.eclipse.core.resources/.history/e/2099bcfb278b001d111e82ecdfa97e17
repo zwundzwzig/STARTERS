@@ -1,0 +1,5 @@
+package servelettest;
+
+public class AServlet {
+
+}

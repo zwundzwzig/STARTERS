@@ -1,0 +1,7 @@
+package servelettest;
+
+import javax.servlet.http.HttpServlet;
+
+public class AServlet extends HttpServlet {
+
+}

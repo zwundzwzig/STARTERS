@@ -1,0 +1,51 @@
+package test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DAO.MemberDAO;
+import DTO.MemberDTO;
+
+@WebServlet("/signup")
+public class InsertDBServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		res.setContentType("text/html; charset=utf-8;");
+		PrintWriter out = res.getWriter();
+		
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String name = req.getParameter("name");
+		String phone = req.getParameter("phone");
+		String mail = req.getParameter("mail");
+		String address = req.getParameter("address");
+		String result = "";
+		MemberDTO dto = new MemberDAO().getMember(id, pw);
+
+		if(id.equals("") || pw == null || name == null || phone == null || mail == null || address == null) {
+			out.write("<script>alert('필요 정보 모두 입력하시오.');location.href='/servelettest/insert_db.html';</script>");
+			out.close();
+		}
+		
+		
+		if(dto != null && dto.getPw() == null) {
+			result = "<h1>" + id + "회원님 로그인 완료</h1>";
+		}
+		else if(dto != null && dto.getPw() == null) {
+			result = "<h1>" + id + "님 비밀번호를 확인해주세요."
+					+ "<br /><a href='login_db.html'>다시 로그인 하러 가기</a></h1>";
+		}
+		
+		int count = new MemberDAO().insertMember(new MemberDTO(id, pw, name, mail, phone, address));
+		out.println("<h1> " + count + "개의 데이터가 새로 입력됐어요.</h1>");
+	}
+
+}
